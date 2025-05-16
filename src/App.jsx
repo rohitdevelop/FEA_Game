@@ -5,7 +5,7 @@ import Home from "./Components/Home";
 import Rounde1 from "./Components/easy/Round1";
 import Rounde2 from "./Components/easy/Round2";
 import Rounde3 from "./Components/easy/Round3";
-import Easyhun from "./Components/easy/easyhun";
+ import Easyone from "./Components/easy/Easyone";
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/easy/round1" element={ <Rounde1 />}></Route>
           <Route path="/easy/round2" element={ <Rounde2 />}></Route>
           <Route path="/easy/round3" element={ <Rounde3 />}></Route>
-          <Route path="/question/1/100" element={<Easyhun />}></Route>
+          <Route path="/question/1/100" element={<Easyone />}></Route>
         </Routes>
       
       </div>

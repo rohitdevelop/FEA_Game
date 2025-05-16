@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Easyhun = () => {
-  const [showCountdown, setShowCountdown] = useState(false);
+ 
+
+const Easyone = () => {
+      const [showCountdown, setShowCountdown] = useState(false);
   const [count, setCount] = useState(3);
   const [showAnswer, setShowAnswer] = useState(false);
   const navigate = useNavigate();
@@ -24,9 +26,8 @@ const Easyhun = () => {
     setShowCountdown(true);
     setCount(3);
   };
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-blue-50 relative px-4">
+     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-blue-50 relative px-4">
       {/* Countdown Overlay */}
       {showCountdown && (
         <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
@@ -65,7 +66,7 @@ const Easyhun = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Easyhun;
+export default Easyone;
