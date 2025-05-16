@@ -1,23 +1,27 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./Components/Navbar";
+import Home from "./Components/Home";
+import Rounde1 from "./Components/easy/Round1";
+import Rounde2 from "./Components/easy/Round2";
+import Rounde3 from "./Components/easy/Round3";
+import Easyhun from "./Components/easy/easyhun";
 
 const App = () => {
   return (
-    <div className="flex flex-col gap-9 m-9">
-      <h1 className="bg-red-500 text-4xl text-center">hello rohit</h1>
-      <div className="h-48 w-64 text-center border-2 border-black overflow-auto">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
-          doloribus corporis adipisci a eaque id impedit molestias itaque
-          repudiandae? Velit voluptatibus rerum quisquam veniam illum ipsa iste
-          excepturi nobis dignissimos!lorem45 Lorem ipsum dolor, sit amet
-          consectetur adipisicing elit. Voluptates placeat odit quia rerum sit
-          aspernatur, blanditiis, ut numquam porro architecto, ratione ab nihil
-          expedita accusantium pariatur! Ea in at dolore praesentium iusto
-          quaerat velit nesciunt ipsa officia alias, perferendis ullam
-          laboriosam inventore ad, molestiae repudiandae.
-        </p>
+    <>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/easy/round1" element={ <Rounde1 />}></Route>
+          <Route path="/easy/round2" element={ <Rounde2 />}></Route>
+          <Route path="/easy/round3" element={ <Rounde3 />}></Route>
+          <Route path="/question/1/100" element={<Easyhun />}></Route>
+        </Routes>
+      
       </div>
-    </div>
+    </>
   );
 };
 
