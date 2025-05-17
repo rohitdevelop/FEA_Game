@@ -9,7 +9,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-gradient-to-b from-white to-blue-50">
+    <div className="flex flex-col items-center justify-center h-[92vh] px-4 bg-gradient-to-b from-white to-blue-500">
       <h1 className="text-4xl md:text-5xl font-extrabold mb-10 text-blue-700 drop-shadow-lg tracking-wide text-center">
         🎯 Jeopardy Game
       </h1>
