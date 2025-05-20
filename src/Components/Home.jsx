@@ -26,7 +26,7 @@ const Home = () => {
           <div className="flex justify-center gap-4 mt-5 flex-wrap transition-all duration-300">
             {["Round 1", "Round 2", "Round 3"].map((round, idx) => (
               <Link key={idx} to={`/easy/round${idx + 1}`}>
-                <div className="w-24 h-24 bg-blue-200 text-black font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-blue-300 transition-all duration-300 cursor-pointer">
+                <div className="w-24 h-24 bg-green-300 text-black font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-green-400 transition-all duration-300 cursor-pointer">
                   {round}
                 </div>
               </Link>
@@ -45,7 +45,7 @@ const Home = () => {
             {["Round 1", "Round 2", "Round 3"].map((round, idx) => (
               <div
                 key={idx}
-                className="w-24 h-24 bg-blue-300 text-white font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-blue-400 transition-all duration-300 cursor-pointer"
+                className="w-24 h-24 bg-yellow-300 text-black font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-yellow-400 transition-all duration-300 cursor-pointer"
               >
                 {round}
               </div>
@@ -64,7 +64,7 @@ const Home = () => {
             {["Round 1", "Round 2", "Round 3"].map((round, idx) => (
               <div
                 key={idx}
-                className="w-24 h-24 bg-blue-400 text-white font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-blue-500 transition-all duration-300 cursor-pointer"
+                className="w-24 h-24 bg-red-400 text-black font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-red-500 transition-all duration-300 cursor-pointer"
               >
                 {round}
               </div>

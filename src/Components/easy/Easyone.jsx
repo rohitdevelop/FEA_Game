@@ -1,72 +1,111 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
- 
-
 const Easyone = () => {
-      const [showCountdown, setShowCountdown] = useState(false);
-  const [count, setCount] = useState(3);
-  const [showAnswer, setShowAnswer] = useState(false);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [timer, setTimer] = useState(3);
+  const [timerActive, setTimerActive] = useState(false);
   const navigate = useNavigate();
 
+  const correctAnswer = "am";
+
+  // Timer effect
   useEffect(() => {
-    let timer;
-    if (showCountdown && count > 0) {
-      timer = setTimeout(() => setCount((prev) => prev - 1), 1000);
-    } else if (showCountdown && count === 0) {
-      setTimeout(() => {
-        setShowCountdown(false);
-        setShowAnswer(true);
+    let interval;
+    if (timerActive && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
       }, 1000);
+    } else if (timerActive && timer === 0) {
+      setTimerActive(false);
+      setShowResult(true);
+      setSubmitted(true);
     }
-    return () => clearTimeout(timer);
-  }, [showCountdown, count]);
+    return () => clearInterval(interval);
+  }, [timerActive, timer]);
 
-  const handleAnswerClick = () => {
-    setShowCountdown(true);
-    setCount(3);
+  // Check answer after timer ends
+  useEffect(() => {
+    if (!timerActive && timer === 0) {
+      const answerTrimmed = userAnswer.trim().toLowerCase();
+      setIsCorrect(answerTrimmed === correctAnswer);
+    }
+  }, [timerActive, timer, userAnswer]);
+
+  const handleInputChange = (e) => {
+    setUserAnswer(e.target.value);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTimer(3);
+    setTimerActive(true);
+    setShowResult(false);
+    setSubmitted(false);
+    setIsCorrect(false);
+  };
+
   return (
-     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-blue-50 relative px-4">
-      {/* Countdown Overlay */}
-      {showCountdown && (
-        <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <h1 className="text-white text-8xl font-extrabold animate-pulse">{count}</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-blue-50 relative px-4 transition-all duration-500">
+      {/* Timer Overlay */}
+      {timerActive && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-50 bg-white/80 transition-all duration-500">
+          <h1 className="text-black font-extrabold" style={{ fontSize: "16vw", lineHeight: 1 }}>
+            {timer}
+          </h1>
+          <p className="text-2xl font-semibold text-gray-700 mt-4">Checking your answer...</p>
         </div>
       )}
 
-      {/* Final Answer */}
-      {showAnswer ? (
-        <h1 className="text-6xl font-extrabold text-green-600 z-10">✅ am</h1>
-      ) : (
-        <div className="text-center bg-white p-8 rounded-xl shadow-xl w-full max-w-xl z-10">
-          <h1 className="text-2xl font-bold text-blue-800 mb-2">📘 Category: Grammar</h1>
-          <h2 className="text-lg text-gray-700 mb-6">For 100 Points</h2>
-
-          <p className="text-xl font-medium text-gray-700 mb-8">
-            I <span className="underline decoration-dotted decoration-blue-500">_____</span> a student.
+      {/* Result Overlay */}
+      {showResult && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-50 bg-white/80 transition-all duration-500">
+          <h1 className={`text-6xl md:text-7xl font-extrabold mb-4 ${isCorrect ? "text-green-600" : "text-red-500"}`}>
+            {isCorrect ? `✅ ${correctAnswer}` : `❌`}
+          </h1>
+          <p className={`text-3xl font-bold mb-2 ${isCorrect ? "text-green-700" : "text-red-600"}`}>
+            {isCorrect ? "Congratulations!" : "Better luck next time!"}
           </p>
-
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={() => navigate(-1)}
-              className="px-6 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg font-semibold transition"
-              disabled={showCountdown}
-            >
-              ⬅️ Back
-            </button>
-            <button
-              onClick={handleAnswerClick}
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition"
-              disabled={showCountdown}
-            >
-              ✅ Answer
-            </button>
-          </div>
+          {!isCorrect && (
+            <p className="text-xl font-semibold text-blue-700">
+              Correct Answer: <span className="underline">{correctAnswer}</span>
+            </p>
+          )}
         </div>
       )}
+
+      {/* Main Content */}
+      <div
+        className={`text-center bg-white p-10 rounded-2xl shadow-2xl w-full max-w-xl z-10 transition-all duration-500 ${
+          (submitted || timerActive) ? "opacity-50 pointer-events-none select-none" : "opacity-100"
+        }`}
+      >
+        <h1 className="text-3xl font-bold text-blue-800 mb-6">
+          📘 Category: Fill in the blank
+        </h1>
+        <p className="text-xl font-medium mb-4">I ___ a student.</p>
+
+        <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
+          <input
+            type="text"
+            value={userAnswer}
+            onChange={handleInputChange}
+            placeholder="Your Answer"
+            className="border border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-blue-700 transition-all"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Easyone;
