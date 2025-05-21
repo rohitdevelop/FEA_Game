@@ -43,12 +43,11 @@ const Home = () => {
         {level === "intermediate" && (
           <div className="flex justify-center gap-4 mt-5 flex-wrap transition-all duration-300">
             {["Round 1", "Round 2", "Round 3"].map((round, idx) => (
-              <div
-                key={idx}
-                className="w-24 h-24 bg-yellow-300 text-black font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-yellow-400 transition-all duration-300 cursor-pointer"
-              >
-                {round}
-              </div>
+              <Link key={idx} to={`/intermediate/round${idx + 1}`}>
+                <div className="w-24 h-24 bg-yellow-300 text-black font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-yellow-400 transition-all duration-300 cursor-pointer">
+                  {round}
+                </div>
+              </Link>
             ))}
           </div>
         )}
@@ -62,12 +61,11 @@ const Home = () => {
         {level === "hard" && (
           <div className="flex justify-center gap-4 mt-5 flex-wrap transition-all duration-300">
             {["Round 1", "Round 2", "Round 3"].map((round, idx) => (
-              <div
-                key={idx}
-                className="w-24 h-24 bg-red-400 text-black font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-red-500 transition-all duration-300 cursor-pointer"
-              >
-                {round}
-              </div>
+              <Link key={idx} to={`/hard/round${idx + 1}`}>
+                <div className="w-24 h-24 bg-red-400 text-black font-bold rounded-xl shadow-lg flex items-center justify-center hover:bg-red-500 transition-all duration-300 cursor-pointer">
+                  {round}
+                </div>
+              </Link>
             ))}
           </div>
         )}

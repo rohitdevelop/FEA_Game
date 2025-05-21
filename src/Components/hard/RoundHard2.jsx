@@ -1,42 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-const Round1 = () => {
-  const categories = ["Category 1", "Category 2", "Category 3"];
-  const points = ["100", "200", "300", "400"];
-
-  const [disabled, setDisabled] = useState({});
-
-  const difficultyStyles = {
-    100: { bg: "bg-green-200", hover: "hover:bg-green-300", emoji: "🟢" },
-    200: { bg: "bg-yellow-200", hover: "hover:bg-yellow-300", emoji: "🟡" },
-    300: { bg: "bg-orange-200", hover: "hover:bg-orange-300", emoji: "🟠" },
-    400: { bg: "bg-red-200", hover: "hover:bg-red-300", emoji: "🔴" },
-  };
-
-  // Load saved state from localStorage on component mount
-  useEffect(() => {
-    const savedState = localStorage.getItem("round1-disabled");
-    if (savedState) {
-      setDisabled(JSON.parse(savedState));
-    }
-  }, []);
-
-  // Save to localStorage whenever state changes
-  const handleToggle = (key) => {
-    setDisabled((prev) => {
-      const updated = { ...prev, [key]: !prev[key] };
-      localStorage.setItem("round1-disabled", JSON.stringify(updated));
-      return updated;
-    });
-  };
-
+const RoundHard2 = () => {
+    const categories = ["Category 1", "Category 2", "Category 3"];
+    const points = ["100", "200", "300", "400"];
+  
+    const [disabled, setDisabled] = useState({});
+  
+    const difficultyStyles = {
+      100: { bg: "bg-green-200", hover: "hover:bg-green-300", emoji: "🟢" },
+      200: { bg: "bg-yellow-200", hover: "hover:bg-yellow-300", emoji: "🟡" },
+      300: { bg: "bg-orange-200", hover: "hover:bg-orange-300", emoji: "🟠" },
+      400: { bg: "bg-red-200", hover: "hover:bg-red-300", emoji: "🔴" },
+    };
+  
+    // Load saved state from localStorage on component mount
+    useEffect(() => {
+      const savedState = localStorage.getItem("round1-disabled");
+      if (savedState) {
+        setDisabled(JSON.parse(savedState));
+      }
+    }, []);
+  
+    // Save to localStorage whenever state changes
+    const handleToggle = (key) => {
+      setDisabled((prev) => {
+        const updated = { ...prev, [key]: !prev[key] };
+        localStorage.setItem("round1-disabled", JSON.stringify(updated));
+        return updated;
+      });
+    };
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-green-500 flex flex-col items-center overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-white to-red-500 flex flex-col items-center overflow-hidden">
       {/* Heading */}
       <div className="text-center mb-5">
         <h1 className="text-5xl font-extrabold text-blue-800 drop-shadow-lg tracking-wide">
-         Easy Round 1
+         Hard Round 2
         </h1>
       </div>
 
@@ -89,7 +87,7 @@ const Round1 = () => {
                       {/* Question Link */}
                       <Link
                         to={
-                          !isDisabled ? `/easy/Round1/${catIndex + 1}/${pt}` : "#"
+                          !isDisabled ? `/Hard/Round2/${catIndex + 1}/${pt}` : "#"
                         }
                         className={`w-48 h-24 rounded-2xl shadow-xl flex items-center justify-center font-bold text-2xl text-center transition-all duration-300 border-2 border-blue-200
                   ${
@@ -113,7 +111,7 @@ const Round1 = () => {
           {/* Right Button */}
           <div className="flex justify-center items-center h-full">
             <Link
-              to="/easy/round2"
+              to="/Hard/round3"
               className="px-6 py-3 bg-blue-600 hover:bg-blue-800 text-white text-lg font-bold rounded-2xl shadow-lg transition duration-300"
             >
               Next Round ➡️
@@ -122,7 +120,7 @@ const Round1 = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Round1;
+export default RoundHard2

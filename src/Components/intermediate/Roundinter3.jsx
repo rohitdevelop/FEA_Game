@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Round1 = () => {
+const Roundinter3 = () => {
   const categories = ["Category 1", "Category 2", "Category 3"];
   const points = ["100", "200", "300", "400"];
 
@@ -30,13 +30,12 @@ const Round1 = () => {
       return updated;
     });
   };
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-green-500 flex flex-col items-center overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-white to-yellow-500 flex flex-col items-center overflow-hidden">
       {/* Heading */}
       <div className="text-center mb-5">
         <h1 className="text-5xl font-extrabold text-blue-800 drop-shadow-lg tracking-wide">
-         Easy Round 1
+          intermediate Round 3
         </h1>
       </div>
 
@@ -89,14 +88,16 @@ const Round1 = () => {
                       {/* Question Link */}
                       <Link
                         to={
-                          !isDisabled ? `/easy/Round1/${catIndex + 1}/${pt}` : "#"
+                          !isDisabled
+                            ? `/Intermediate/Round3/${catIndex + 1}/${pt}`
+                            : "#"
                         }
                         className={`w-48 h-24 rounded-2xl shadow-xl flex items-center justify-center font-bold text-2xl text-center transition-all duration-300 border-2 border-blue-200
-                  ${
-                    isDisabled
-                      ? "bg-gray-300 text-gray-500 cursor-not-allowed scale-95"
-                      : `${style.bg} ${style.hover} text-blue-900 cursor-pointer hover:scale-105 hover:shadow-2xl`
-                  }`}
+                             ${
+                               isDisabled
+                                 ? "bg-gray-300 text-gray-500 cursor-not-allowed scale-95"
+                                 : `${style.bg} ${style.hover} text-blue-900 cursor-pointer hover:scale-105 hover:shadow-2xl`
+                             }`}
                         onClick={(e) => {
                           if (isDisabled) e.preventDefault();
                         }}
@@ -113,10 +114,10 @@ const Round1 = () => {
           {/* Right Button */}
           <div className="flex justify-center items-center h-full">
             <Link
-              to="/easy/round2"
+              to="/Hard/round1"
               className="px-6 py-3 bg-blue-600 hover:bg-blue-800 text-white text-lg font-bold rounded-2xl shadow-lg transition duration-300"
             >
-              Next Round ➡️
+              Next Level ➡️
             </Link>
           </div>
         </div>
@@ -125,4 +126,4 @@ const Round1 = () => {
   );
 };
 
-export default Round1;
+export default Roundinter3;
