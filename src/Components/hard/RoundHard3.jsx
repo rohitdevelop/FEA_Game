@@ -1,62 +1,81 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 const RoundHard3 = () => {
-    const categories = ["Category 1", "Category 2", "Category 3"];
-    const points = ["100", "200", "300", "400"];
-  
-    const [disabled, setDisabled] = useState({});
-  
-    const difficultyStyles = {
-      100: { bg: "bg-green-200", hover: "hover:bg-green-300", emoji: "🟢" },
-      200: { bg: "bg-yellow-200", hover: "hover:bg-yellow-300", emoji: "🟡" },
-      300: { bg: "bg-orange-200", hover: "hover:bg-orange-300", emoji: "🟠" },
-      400: { bg: "bg-red-200", hover: "hover:bg-red-300", emoji: "🔴" },
-    };
-  
-    // Load saved state from localStorage on component mount
-    useEffect(() => {
-      const savedState = localStorage.getItem("round1-disabled");
-      if (savedState) {
-        setDisabled(JSON.parse(savedState));
-      }
-    }, []);
-  
-    // Save to localStorage whenever state changes
-    const handleToggle = (key) => {
-      setDisabled((prev) => {
-        const updated = { ...prev, [key]: !prev[key] };
-        localStorage.setItem("round1-disabled", JSON.stringify(updated));
-        return updated;
-      });
-    };
+  const categories = ["Category 1", "Category 2", "Category 3"];
+  const points = ["100", "200", "300", "400"];
+
+  const [disabled, setDisabled] = useState({});
+
+  const difficultyStyles = {
+    100: { bg: "bg-green-200", hover: "hover:bg-green-300", emoji: "🟢" },
+    200: { bg: "bg-yellow-200", hover: "hover:bg-yellow-300", emoji: "🟡" },
+    300: { bg: "bg-orange-200", hover: "hover:bg-orange-300", emoji: "🟠" },
+    400: { bg: "bg-red-200", hover: "hover:bg-red-300", emoji: "🔴" },
+  };
+
+  useEffect(() => {
+    const savedState = localStorage.getItem("round1-disabled");
+    if (savedState) {
+      setDisabled(JSON.parse(savedState));
+    }
+  }, []);
+
+  const handleToggle = (key) => {
+    setDisabled((prev) => {
+      const updated = { ...prev, [key]: !prev[key] };
+      localStorage.setItem("round1-disabled", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  // Animation variants for grid items
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 },
+    hover: { scale: 1.05, boxShadow: "0 0 15px rgba(0,0,0,0.3)" },
+  };
+
   return (
-        <div className="min-h-screen bg-gradient-to-b from-white to-red-500 flex flex-col items-center overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-white to-red-500 flex flex-col items-center overflow-hidden">
       {/* Heading */}
-      <div className="text-center mb-5">
+      <motion.div
+        className="text-center mb-5"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <h1 className="text-5xl font-extrabold text-blue-800 drop-shadow-lg tracking-wide">
-         Hard Round 3
+          Hard Round 3
         </h1>
-      </div>
+      </motion.div>
 
       {/* Game Board */}
       <div className="w-full max-w-6xl">
         {/* Categories Row */}
         <div className="flex justify-center gap-8 mb-4 flex-wrap">
           {categories.map((cat, catIndex) => (
-            <div
+            <motion.div
               key={catIndex}
               className="w-48 h-16 flex items-center justify-center bg-blue-600 text-white text-2xl font-bold rounded-t-2xl shadow-lg border-b-4 border-blue-800 uppercase tracking-wide"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: catIndex * 0.15, duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
             >
               {cat}
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Points Grid */}
-        {/* Game Area with Side Buttons */}
         <div className="flex justify-center items-center gap-8 mt-10 w-full px-4">
           {/* Left Button */}
-          <div className="flex justify-center items-center h-full">
+          <div
+            className="flex justify-center items-center h-full"
+         
+          >
             <Link
               to="/"
               className="px-6 py-3 bg-blue-600 hover:bg-blue-800 text-white text-lg font-bold rounded-2xl shadow-lg transition duration-300"
@@ -75,7 +94,15 @@ const RoundHard3 = () => {
                   const style = difficultyStyles[pt];
 
                   return (
-                    <div key={ptIndex} className="relative group">
+                    <motion.div
+                      key={ptIndex}
+                      className="relative group"
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate="visible"
+                      whileHover={!isDisabled ? "hover" : {}}
+                      transition={{ duration: 0.3, delay: ptIndex * 0.1 }}
+                    >
                       {/* Toggle checkbox */}
                       <input
                         type="checkbox"
@@ -86,14 +113,12 @@ const RoundHard3 = () => {
 
                       {/* Question Link */}
                       <Link
-                        to={
-                          !isDisabled ? `/Hard/Round3/${catIndex + 1}/${pt}` : "#"
-                        }
+                        to={!isDisabled ? `/Hard/Round3/${catIndex + 1}/${pt}` : "#"}
                         className={`w-48 h-24 rounded-2xl shadow-xl flex items-center justify-center font-bold text-2xl text-center transition-all duration-300 border-2 border-blue-200
                   ${
                     isDisabled
                       ? "bg-gray-300 text-gray-500 cursor-not-allowed scale-95"
-                      : `${style.bg} ${style.hover} text-blue-900 cursor-pointer hover:scale-105 hover:shadow-2xl`
+                      : `${style.bg} ${style.hover} text-blue-900 cursor-pointer`
                   }`}
                         onClick={(e) => {
                           if (isDisabled) e.preventDefault();
@@ -101,7 +126,7 @@ const RoundHard3 = () => {
                       >
                         {isDisabled ? "❌" : `${style.emoji} ${pt}`}
                       </Link>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -109,7 +134,10 @@ const RoundHard3 = () => {
           </div>
 
           {/* Right Button */}
-          <div className="flex justify-center items-center h-full">
+          <div
+            className="flex justify-center items-center h-full"
+             
+          >
             <Link
               to="/Hard/round1"
               className="px-6 py-3 bg-blue-600 hover:bg-blue-800 text-white text-lg font-bold rounded-2xl shadow-lg transition duration-300"
@@ -120,7 +148,7 @@ const RoundHard3 = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RoundHard3
+export default RoundHard3;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Round1 = () => {
   const categories = ["Category 1", "Category 2", "Category 3"];
@@ -14,7 +15,6 @@ const Round1 = () => {
     400: { bg: "bg-red-200", hover: "hover:bg-red-300", emoji: "🔴" },
   };
 
-  // Load saved state from localStorage on component mount
   useEffect(() => {
     const savedState = localStorage.getItem("round1-disabled");
     if (savedState) {
@@ -22,7 +22,6 @@ const Round1 = () => {
     }
   }, []);
 
-  // Save to localStorage whenever state changes
   const handleToggle = (key) => {
     setDisabled((prev) => {
       const updated = { ...prev, [key]: !prev[key] };
@@ -33,17 +32,28 @@ const Round1 = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-green-500 flex flex-col items-center overflow-hidden">
-      {/* Heading */}
-      <div className="text-center mb-5">
+      
+      {/* 🏁 Animated Heading */}
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 80, damping: 10 }}
+        className="text-center mb-5"
+      >
         <h1 className="text-5xl font-extrabold text-blue-800 drop-shadow-lg tracking-wide">
-         Easy Round 1
+          Easy Round 1
         </h1>
-      </div>
+      </motion.div>
 
       {/* Game Board */}
       <div className="w-full max-w-6xl">
         {/* Categories Row */}
-        <div className="flex justify-center gap-8 mb-4 flex-wrap">
+        <motion.div
+          initial={{ y: -80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+          className="flex justify-center gap-8 mb-4 flex-wrap"
+        >
           {categories.map((cat, catIndex) => (
             <div
               key={catIndex}
@@ -52,23 +62,33 @@ const Round1 = () => {
               {cat}
             </div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Points Grid */}
-        {/* Game Area with Side Buttons */}
+        {/* Game Area with Buttons & Grid */}
         <div className="flex justify-center items-center gap-8 mt-10 w-full px-4">
-          {/* Left Button */}
-          <div className="flex justify-center items-center h-full">
+
+          {/* ⬅️ Left Button */}
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex justify-center items-center h-full"
+          >
             <Link
               to="/"
               className="px-6 py-3 bg-blue-600 hover:bg-blue-800 text-white text-lg font-bold rounded-2xl shadow-lg transition duration-300"
             >
               ⬅️ Back to Home
             </Link>
-          </div>
+          </motion.div>
 
-          {/* Points Grid */}
-          <div className="flex justify-center gap-8 flex-wrap ">
+          {/* 🔢 Points Grid */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="flex justify-center gap-8 flex-wrap"
+          >
             {categories.map((cat, catIndex) => (
               <div key={catIndex} className="flex flex-col gap-6">
                 {points.map((pt, ptIndex) => {
@@ -77,8 +97,13 @@ const Round1 = () => {
                   const style = difficultyStyles[pt];
 
                   return (
-                    <div key={ptIndex} className="relative group">
-                      {/* Toggle checkbox */}
+                    <motion.div
+                      key={ptIndex}
+                      initial={{ y: 50, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.7 + ptIndex * 0.1 }}
+                      className="relative group"
+                    >
                       <input
                         type="checkbox"
                         onChange={() => handleToggle(key)}
@@ -86,39 +111,43 @@ const Round1 = () => {
                         checked={isDisabled}
                       />
 
-                      {/* Question Link */}
                       <Link
                         to={
                           !isDisabled ? `/easy/Round1/${catIndex + 1}/${pt}` : "#"
                         }
                         className={`w-48 h-24 rounded-2xl shadow-xl flex items-center justify-center font-bold text-2xl text-center transition-all duration-300 border-2 border-blue-200
-                  ${
-                    isDisabled
-                      ? "bg-gray-300 text-gray-500 cursor-not-allowed scale-95"
-                      : `${style.bg} ${style.hover} text-blue-900 cursor-pointer hover:scale-105 hover:shadow-2xl`
-                  }`}
+                          ${
+                            isDisabled
+                              ? "bg-gray-300 text-gray-500 cursor-not-allowed scale-95"
+                              : `${style.bg} ${style.hover} text-blue-900 cursor-pointer hover:scale-105 hover:shadow-2xl`
+                          }`}
                         onClick={(e) => {
                           if (isDisabled) e.preventDefault();
                         }}
                       >
                         {isDisabled ? "❌" : `${style.emoji} ${pt}`}
                       </Link>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
             ))}
-          </div>
+          </motion.div>
 
-          {/* Right Button */}
-          <div className="flex justify-center items-center h-full">
+          {/* ➡️ Right Button */}
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex justify-center items-center h-full"
+          >
             <Link
               to="/easy/round2"
               className="px-6 py-3 bg-blue-600 hover:bg-blue-800 text-white text-lg font-bold rounded-2xl shadow-lg transition duration-300"
             >
               Next Round ➡️
             </Link>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

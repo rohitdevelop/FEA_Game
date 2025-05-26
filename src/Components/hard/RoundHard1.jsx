@@ -1,40 +1,66 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 const RoundHard1 = () => {
-      const categories = ["Category 1", "Category 2", "Category 3"];
-      const points = ["100", "200", "300", "400"];
-    
-      const [disabled, setDisabled] = useState({});
-    
-      const difficultyStyles = {
-        100: { bg: "bg-green-200", hover: "hover:bg-green-300", emoji: "🟢" },
-        200: { bg: "bg-yellow-200", hover: "hover:bg-yellow-300", emoji: "🟡" },
-        300: { bg: "bg-orange-200", hover: "hover:bg-orange-300", emoji: "🟠" },
-        400: { bg: "bg-red-200", hover: "hover:bg-red-300", emoji: "🔴" },
-      };
-    
-      // Load saved state from localStorage on component mount
-      useEffect(() => {
-        const savedState = localStorage.getItem("round1-disabled");
-        if (savedState) {
-          setDisabled(JSON.parse(savedState));
-        }
-      }, []);
-    
-      // Save to localStorage whenever state changes
-      const handleToggle = (key) => {
-        setDisabled((prev) => {
-          const updated = { ...prev, [key]: !prev[key] };
-          localStorage.setItem("round1-disabled", JSON.stringify(updated));
-          return updated;
-        });
-      };
+  const categories = ["Category 1", "Category 2", "Category 3"];
+  const points = ["100", "200", "300", "400"];
+
+  const [disabled, setDisabled] = useState({});
+
+  const difficultyStyles = {
+    100: { bg: "bg-green-200", hover: "hover:bg-green-300", emoji: "🟢" },
+    200: { bg: "bg-yellow-200", hover: "hover:bg-yellow-300", emoji: "🟡" },
+    300: { bg: "bg-orange-200", hover: "hover:bg-orange-300", emoji: "🟠" },
+    400: { bg: "bg-red-200", hover: "hover:bg-red-300", emoji: "🔴" },
+  };
+
+  useEffect(() => {
+    const savedState = localStorage.getItem("round1-disabled");
+    if (savedState) {
+      setDisabled(JSON.parse(savedState));
+    }
+  }, []);
+
+  const handleToggle = (key) => {
+    setDisabled((prev) => {
+      const updated = { ...prev, [key]: !prev[key] };
+      localStorage.setItem("round1-disabled", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
+  const categoryVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: (i) => ({
+      opacity: 1,
+      scale: 1,
+      transition: { delay: i * 0.2, duration: 0.4 },
+    }),
+  };
+
+  const pointVariants = {
+    rest: { scale: 1, opacity: 1 },
+    hover: { scale: 1.05, boxShadow: "0 8px 15px rgba(0,0,0,0.3)" },
+  };
+
   return (
-       <div className="min-h-screen bg-gradient-to-b from-white to-red-500 flex flex-col items-center overflow-hidden">
+    <motion.div
+      className="min-h-screen bg-gradient-to-b from-white to-red-500 flex flex-col items-center overflow-hidden"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {/* Heading */}
       <div className="text-center mb-5">
         <h1 className="text-5xl font-extrabold text-blue-800 drop-shadow-lg tracking-wide">
-         Hard Round 1
+          Hard Round 1
         </h1>
       </div>
 
@@ -43,12 +69,16 @@ const RoundHard1 = () => {
         {/* Categories Row */}
         <div className="flex justify-center gap-8 mb-4 flex-wrap">
           {categories.map((cat, catIndex) => (
-            <div
+            <motion.div
               key={catIndex}
               className="w-48 h-16 flex items-center justify-center bg-blue-600 text-white text-2xl font-bold rounded-t-2xl shadow-lg border-b-4 border-blue-800 uppercase tracking-wide"
+              variants={categoryVariants}
+              initial="hidden"
+              animate="visible"
+              custom={catIndex}
             >
               {cat}
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -75,7 +105,14 @@ const RoundHard1 = () => {
                   const style = difficultyStyles[pt];
 
                   return (
-                    <div key={ptIndex} className="relative group">
+                    <motion.div
+                      key={ptIndex}
+                      className="relative group"
+                      variants={pointVariants}
+                      initial="rest"
+                      whileHover={!isDisabled ? "hover" : "rest"}
+                      animate="rest"
+                    >
                       {/* Toggle checkbox */}
                       <input
                         type="checkbox"
@@ -86,14 +123,12 @@ const RoundHard1 = () => {
 
                       {/* Question Link */}
                       <Link
-                        to={
-                          !isDisabled ? `/Hard/Round1/${catIndex + 1}/${pt}` : "#"
-                        }
+                        to={!isDisabled ? `/Hard/Round1/${catIndex + 1}/${pt}` : "#"}
                         className={`w-48 h-24 rounded-2xl shadow-xl flex items-center justify-center font-bold text-2xl text-center transition-all duration-300 border-2 border-blue-200
                   ${
                     isDisabled
                       ? "bg-gray-300 text-gray-500 cursor-not-allowed scale-95"
-                      : `${style.bg} ${style.hover} text-blue-900 cursor-pointer hover:scale-105 hover:shadow-2xl`
+                      : `${style.bg} ${style.hover} text-blue-900 cursor-pointer`
                   }`}
                         onClick={(e) => {
                           if (isDisabled) e.preventDefault();
@@ -101,7 +136,7 @@ const RoundHard1 = () => {
                       >
                         {isDisabled ? "❌" : `${style.emoji} ${pt}`}
                       </Link>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -119,8 +154,8 @@ const RoundHard1 = () => {
           </div>
         </div>
       </div>
-    </div>
-  )
-}
+    </motion.div>
+  );
+};
 
-export default RoundHard1
+export default RoundHard1;
