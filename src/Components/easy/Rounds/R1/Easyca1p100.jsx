@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-const Easyone = () => {
+ 
+const Easyca1p100 = () => {
   const [userAnswer, setUserAnswer] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [timer, setTimer] = useState(3);
   const [timerActive, setTimerActive] = useState(false);
-  const navigate = useNavigate();
-
-  const correctAnswer = "am";
+ 
+  const correctAnswer = "k";
 
   // Timer effect
   useEffect(() => {
@@ -83,10 +81,11 @@ const Easyone = () => {
           (submitted || timerActive) ? "opacity-50 pointer-events-none select-none" : "opacity-100"
         }`}
       >
-        <h1 className="text-3xl font-bold text-blue-800 mb-6">
-          📘 Category: Fill in the blank
+        <h1 className="text-3xl font-bold text-blue-800">
+          📘 Alphabet & Spellings
         </h1>
-        <p className="text-xl font-medium mb-4">I ___ a student.</p>
+     <h2 className='text-red-500 text-2xl mb-6 font-bold'>(100 Points)</h2>
+        <p className="text-xl font-medium mb-4">Which letter is silent in the word “knee”?</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
           <input
@@ -108,4 +107,5 @@ const Easyone = () => {
   );
 };
 
-export default Easyone;
+export default Easyca1p100;
+ 

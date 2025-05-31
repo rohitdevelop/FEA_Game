@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const Round1 = () => {
-  const categories = ["Category 1", "Category 2", "Category 3"];
+const Round1 = () => { 
+  const categories = ["Alphabet & Spellings", " (Abilities & Permissions) Can / Can’t ", "Greetings & Good Manners"];
   const points = ["100", "200", "300", "400"];
 
   const [disabled, setDisabled] = useState({});
@@ -57,7 +57,7 @@ const Round1 = () => {
           {categories.map((cat, catIndex) => (
             <div
               key={catIndex}
-              className="w-48 h-16 flex items-center justify-center bg-blue-600 text-white text-2xl font-bold rounded-t-2xl shadow-lg border-b-4 border-blue-800 uppercase tracking-wide"
+              className="w-48 h-20 px-2 flex items-center justify-center bg-blue-600 text-white text-lg font-bold rounded-t-2xl shadow-lg border-b-4 border-blue-800 uppercase tracking-wide text-center leading-tight break-words"
             >
               {cat}
             </div>
