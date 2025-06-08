@@ -11,10 +11,12 @@ import Routeasy from "./Components/easy/Routeasy";
 import Roundinter1 from "./Components/intermediate/Roundinter1";
 import Roundinter2 from "./Components/intermediate/Roundinter2";
 import Roundinter3 from "./Components/intermediate/Roundinter3";
+import Routinter from "./Components/intermediate/Routinter";
 
 import RoundHard1 from "./Components/hard/RoundHard1";
 import RoundHard2 from "./Components/hard/RoundHard2";
 import RoundHard3 from "./Components/hard/RoundHard3";
+import Routhard from "./Components/hard/Routhard";
 
 const App = () => {
   return (
@@ -33,10 +35,12 @@ const App = () => {
           <Route path="/Intermediate/Round1" element={<Roundinter1 />}></Route>
           <Route path="/Intermediate/Round2" element={<Roundinter2 />}></Route>
           <Route path="/Intermediate/Round3" element={<Roundinter3 />}></Route>
+          <Route path="/intermediate/*" element={<Routinter />} />
 
           <Route path="/Hard/Round1" element={<RoundHard1 />}></Route>
           <Route path="/Hard/Round2" element={<RoundHard2 />}></Route>
           <Route path="/Hard/Round3" element={<RoundHard3 />}></Route>
+          <Route path="/Hard/*" element={<Routhard />} />
         </Routes>
       </div>
     </>

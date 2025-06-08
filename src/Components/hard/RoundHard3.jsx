@@ -16,7 +16,7 @@ const RoundHard3 = () => {
   };
 
   useEffect(() => {
-    const savedState = localStorage.getItem("round1-disabled");
+    const savedState = localStorage.getItem("roundhard3-disabled");
     if (savedState) {
       setDisabled(JSON.parse(savedState));
     }
@@ -25,7 +25,7 @@ const RoundHard3 = () => {
   const handleToggle = (key) => {
     setDisabled((prev) => {
       const updated = { ...prev, [key]: !prev[key] };
-      localStorage.setItem("round1-disabled", JSON.stringify(updated));
+      localStorage.setItem("roundhard3-disabled", JSON.stringify(updated));
       return updated;
     });
   };

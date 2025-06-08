@@ -16,7 +16,7 @@ const Round3 = () => {
   };
 
   useEffect(() => {
-    const savedState = localStorage.getItem("round1-disabled");
+    const savedState = localStorage.getItem("round3-disabled");
     if (savedState) {
       setDisabled(JSON.parse(savedState));
     }
@@ -25,7 +25,7 @@ const Round3 = () => {
   const handleToggle = (key) => {
     setDisabled((prev) => {
       const updated = { ...prev, [key]: !prev[key] };
-      localStorage.setItem("round1-disabled", JSON.stringify(updated));
+      localStorage.setItem("round3-disabled", JSON.stringify(updated));
       return updated;
     });
   };
@@ -85,8 +85,7 @@ const Round3 = () => {
               ⬅️ Back to Home
             </Link>
           </div>
-
-          {/* Points Grid */}
+           {/* Points Grid */}
           <div className="flex justify-center gap-8 flex-wrap">
             {categories.map((cat, catIndex) => (
               <div key={catIndex} className="flex flex-col gap-6">

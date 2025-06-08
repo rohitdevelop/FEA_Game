@@ -17,7 +17,7 @@ const Roundinter2 = () => {
 
   // Load saved state from localStorage on component mount
   useEffect(() => {
-    const savedState = localStorage.getItem("round1-disabled");
+    const savedState = localStorage.getItem("roundinter2-disabled");
     if (savedState) {
       setDisabled(JSON.parse(savedState));
     }
@@ -27,7 +27,7 @@ const Roundinter2 = () => {
   const handleToggle = (key) => {
     setDisabled((prev) => {
       const updated = { ...prev, [key]: !prev[key] };
-      localStorage.setItem("round1-disabled", JSON.stringify(updated));
+      localStorage.setItem("roundinter2-disabled", JSON.stringify(updated));
       return updated;
     });
   };
