@@ -53,7 +53,7 @@ useEffect(() => {
 const handleToggle = (key) => {
   setDisabled((prev) => {
     const updated = { ...prev, [key]: !prev[key] };
-    localStorage.setItem("round1-disabled", JSON.stringify(updated));
+    localStorage.setItem("round3-disabled", JSON.stringify(updated));
     return updated;
   });
 };

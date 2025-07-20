@@ -14,3 +14,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+                      onClick={() => !isDisabled && handleNavigation(`/easy/Round1/${catIndex + 1}/${pt}`)}

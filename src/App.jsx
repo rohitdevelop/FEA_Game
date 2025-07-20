@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./Components/home/Navbar";
+// import Navbar from "./Components/home/Navbar";
 import Home from "./Components/home/Home";
 import Particles from "./Components/home/Particles";
 import Rounde1 from "./Components/easy/Round1";
@@ -12,7 +12,7 @@ const App = () => {
   return (
     <>
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/" element={<Particles />}></Route>

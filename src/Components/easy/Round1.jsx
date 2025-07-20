@@ -150,15 +150,15 @@ const handleToggle = (key) => {
                     </div>
 
                     {/* Card */}
+                    <Link to={`/easy/Round1/${catIndex + 1}/${pt}`}>
                     <button
-                      onClick={() => !isDisabled && handleNavigation(`/easy/Round1/${catIndex + 1}/${pt}`)}
-                      disabled={isDisabled}
+                       disabled={isDisabled}
                       className={`relative w-full h-24 rounded-3xl shadow-xl flex items-center justify-center font-bold text-2xl transition-all duration-300 border border-white/10 backdrop-blur-sm overflow-hidden
                         ${isDisabled
                           ? "bg-gradient-to-br from-gray-600 to-gray-800 text-gray-400 cursor-not-allowed scale-95 opacity-50"
                           : `${style.bg} ${style.hover} text-white cursor-pointer hover:scale-105 hover:shadow-2xl ${style.shadow}`
                         }`}
-                    >
+                        >
                       {/* Animated background shimmer */}
                       {!isDisabled && (
                         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -183,6 +183,7 @@ const handleToggle = (key) => {
                         </>
                       )}
                     </button>
+                      </Link>
                   </div>
                 );
               })}
