@@ -77,10 +77,7 @@ const JeopardyQuestion = () => {
     setShowQuestion(false);
     setRevealAnimation(false);
   };
-
-  const goBack = () => {
-    alert("Going back to game board...");
-  };
+ 
 
   const getTimerColor = () => {
     if (timer > 20) return "text-green-400";
