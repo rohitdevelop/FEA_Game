@@ -14,9 +14,9 @@ const JeopardyQuestion = () => {
   // Question data - can be easily modified
   const questionData = {
     category: "ABILITIES & PERMISSIONS (can/can't)",
-    points: 100,
-    question: "He ___ understand five languages, but he ___ write in only two",
-    answer: "can,can't",
+    points: 400,
+    question: "He ___ beat you",
+    answer: "can't",
     hint: "Think about medieval warriors..."
   };
 

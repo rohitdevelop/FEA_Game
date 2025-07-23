@@ -43,20 +43,19 @@ const Round2 = () => {
   };
 
   useEffect(() => {
-  const savedState = localStorage.getItem("round2-disabled");
-  if (savedState) {
-    setDisabled(JSON.parse(savedState));
-  }
-}, []);
+    const savedState = localStorage.getItem("round2-disabled");
+    if (savedState) {
+      setDisabled(JSON.parse(savedState));
+    }
+  }, []);
 
-const handleToggle = (key) => {
-  setDisabled((prev) => {
-    const updated = { ...prev, [key]: !prev[key] };
-    localStorage.setItem("round2-disabled", JSON.stringify(updated));
-    return updated;
-  });
-};
-
+  const handleToggle = (key) => {
+    setDisabled((prev) => {
+      const updated = { ...prev, [key]: !prev[key] };
+      localStorage.setItem("round2-disabled", JSON.stringify(updated));
+      return updated;
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 flex flex-col items-center overflow-hidden relative">
@@ -72,14 +71,12 @@ const handleToggle = (key) => {
       <div className="w-full max-w-7xl mx-auto px-4 py-6 relative z-10">
         {/* Navigation Bar */}
         <div className="flex justify-between items-center mb-8">
-            <Link to={"/"}>
-          <button
-            className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105"
-            >
-            <span className="text-xl group-hover:animate-bounce">🏠</span>
-            <span>Home</span>
-          </button>
-            </Link>
+          <Link to={"/"}>
+            <button className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105">
+              <span className="text-xl group-hover:animate-bounce">🏠</span>
+              <span>Home</span>
+            </button>
+          </Link>
 
           <div className="text-center">
             <h1 className="text-4xl lg:text-6xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 animate-pulse">
@@ -88,14 +85,12 @@ const handleToggle = (key) => {
             <p className="text-gray-300 text-lg">Level Up Your Skills</p>
           </div>
 
-           <Link to={"/easy/round3"}>
-          <button
-          className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-green-500/25 transition-all duration-300 hover:scale-105"
-          >
-            <span>Next Round</span>
-            <span className="text-xl group-hover:animate-bounce">🚀</span>
-          </button>
-            </Link>
+          <Link to={"/easy/round3"}>
+            <button className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-green-500/25 transition-all duration-300 hover:scale-105">
+              <span>Next Round</span>
+              <span className="text-xl group-hover:animate-bounce">🚀</span>
+            </button>
+          </Link>
         </div>
 
         {/* Categories Header */}
@@ -150,49 +145,47 @@ const handleToggle = (key) => {
                     </div>
 
                     {/* Card */}
-                    <button
-                      onClick={() =>
-                        !isDisabled &&
-                        handleNavigation(`/easy/Round2/${catIndex + 1}/${pt}`)
-                      }
-                      disabled={isDisabled}
-                      className={`relative w-full h-24 rounded-3xl shadow-xl flex items-center justify-center font-bold text-2xl transition-all duration-300 border border-white/10 backdrop-blur-sm overflow-hidden
-                        ${
-                          isDisabled
-                            ? "bg-gradient-to-br from-gray-600 to-gray-800 text-gray-400 cursor-not-allowed scale-95 opacity-50"
-                            : `${style.bg} ${style.hover} text-white cursor-pointer hover:scale-105 hover:shadow-2xl ${style.shadow}`
-                        }`}
-                    >
-                      {/* Animated background shimmer */}
-                      {!isDisabled && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                      )}
+                    <Link to={`/easy/Round2/${catIndex + 1}/${pt}`}>
+                      <button
+                        disabled={isDisabled}
+                        className={`relative w-full h-24 rounded-3xl shadow-xl flex items-center justify-center font-bold text-2xl transition-all duration-300 border border-white/10 backdrop-blur-sm overflow-hidden
+      ${
+        isDisabled
+          ? "bg-gradient-to-br from-gray-600 to-gray-800 text-gray-400 cursor-not-allowed scale-95 opacity-50"
+          : `${style.bg} ${style.hover} text-white cursor-pointer hover:scale-105 hover:shadow-2xl ${style.shadow}`
+      }`}
+                      >
+                        {/* Animated background shimmer */}
+                        {!isDisabled && (
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                        )}
 
-                      {/* Content */}
-                      <div className="relative z-10 flex flex-col items-center gap-2">
-                        <div className="text-3xl">
-                          {isDisabled ? "❌" : style.emoji}
+                        {/* Content */}
+                        <div className="relative z-10 flex flex-col items-center gap-2">
+                          <div className="text-3xl">
+                            {isDisabled ? "❌" : style.emoji}
+                          </div>
+                          <div className="text-xl font-black">
+                            {isDisabled ? "USED" : `${pt} PTS`}
+                          </div>
                         </div>
-                        <div className="text-xl font-black">
-                          {isDisabled ? "USED" : `${pt} PTS`}
-                        </div>
-                      </div>
 
-                      {/* Floating particles effect */}
-                      {!isDisabled && isHovered && (
-                        <>
-                          <div className="absolute top-2 left-2 w-2 h-2 bg-white/60 rounded-full animate-ping"></div>
-                          <div
-                            className="absolute bottom-2 right-2 w-2 h-2 bg-white/60 rounded-full animate-ping"
-                            style={{ animationDelay: "0.5s" }}
-                          ></div>
-                          <div
-                            className="absolute top-1/2 left-1/4 w-1 h-1 bg-white/60 rounded-full animate-ping"
-                            style={{ animationDelay: "1s" }}
-                          ></div>
-                        </>
-                      )}
-                    </button>
+                        {/* Floating particles effect */}
+                        {!isDisabled && isHovered && (
+                          <>
+                            <div className="absolute top-2 left-2 w-2 h-2 bg-white/60 rounded-full animate-ping"></div>
+                            <div
+                              className="absolute bottom-2 right-2 w-2 h-2 bg-white/60 rounded-full animate-ping"
+                              style={{ animationDelay: "0.5s" }}
+                            ></div>
+                            <div
+                              className="absolute top-1/2 left-1/4 w-1 h-1 bg-white/60 rounded-full animate-ping"
+                              style={{ animationDelay: "1s" }}
+                            ></div>
+                          </>
+                        )}
+                      </button>
+                    </Link>
                   </div>
                 );
               })}
